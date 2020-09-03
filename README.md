@@ -24,3 +24,6 @@ limitations, i.e. you can not relay SIGSTOP since you can not even catch it.
 * `INT:TERM` - same
 * `SIGINT:` - receive SIGINT and ignore it, not dispatch
 * `INT:15` - signal numbers are also okay
+
+# issues
+Please submit issues via PR to some file `issue/TITLE.txt`.
