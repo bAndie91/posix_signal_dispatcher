@@ -26,4 +26,4 @@ limitations, i.e. you can not relay SIGSTOP since you can not even catch it.
 * `INT:15` - signal numbers are also okay
 
 # issues
-Please submit issues via PR to some file `issue/TITLE.txt`.
+Please submit issues via PR to some file `<TITLE>.txt` or `<TITLE>.md` on `issues` branch.
