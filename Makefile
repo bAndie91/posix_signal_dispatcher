@@ -1,8 +1,10 @@
 
 all: sigdispatch
 
-signames.h:
-	./gen_signames.sh
+.PHONY: all
 
-sigdispatch: signames.h
+signames.h:
+	./gen_signames.sh > $@
+
+sigdispatch: sigdispatch.c signames.h
 	gcc $(CCFLAGS) $@.c -o $@

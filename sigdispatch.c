@@ -38,7 +38,7 @@ void bad_invocation()
 		"Usage: sigdispatch [SIG_A1:SIG_B1 [SIG_A2:SIG_B2 [...]]] -- <COMMAND> [ARGUMENTS]\n\n"
 		"Execute COMMAND. Received SIG_A is translated to SIG_B and SIG_B sent to COMMAND.\n"
 		"SIG_X can be a signal number or signal name optionally with \"SIG\" prefix.\n"
-		"Empty SIG_B makes the corresponding SIG_A not dispatched.\n"
+		"A dash \"-\" for SIG_B makes the corresponding SIG_A not dispatched.\n"
 		"By default all signals map to itself and relayed to COMMAND (up to system limitations).\n");
 }
 
@@ -132,7 +132,7 @@ int main(int argc, char** argv)
 		sigspec_b++;
 		
 		signal_a = resolve_sigspec(sigspec_a);
-		if(strlen(sigspec_b) == 0)
+		if(strcmp(sigspec_b, "-") == 0)
 			signal_b = SIG_SINK;
 		else
 			signal_b = resolve_sigspec(sigspec_b);
@@ -172,5 +172,5 @@ int main(int argc, char** argv)
 	if(WIFEXITED(child_status))
 		exit(WEXITSTATUS(child_status));
 	else
-		exit(WTERMSIG(child_status) - 128);
+		exit(WTERMSIG(child_status) + 128);
 }

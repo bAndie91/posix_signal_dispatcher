@@ -5,5 +5,4 @@ set -e
 
 echo "#include <signal.h>" |\
 g++ -E -dD -xc++ - |\
-perl -ne 'if(/^#define SIG([A-Z]+) (\d+|SIG[A-Z]+)/) { print "{ \"$1\", $2 },\n"; }' \
-> signames.h
+perl -ne 'if(/^#define SIG([A-Z]+) (\d+|SIG[A-Z]+)/) { print "{ \"$1\", $2 },\n"; }'
