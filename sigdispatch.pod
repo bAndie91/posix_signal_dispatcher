@@ -1,0 +1,51 @@
+=pod
+
+=head1 NAME
+
+sigdispatch - Translate received signals and re-send them to subprocess.
+
+=head1 SYNOPSIS
+
+sigdispatch [I<SIG_A1>:I<SIG_B1> [I<SIG_A2>:I<SIG_B2> [...]]] -- I<COMMAND> [I<ARGS>]
+
+=head1 DESCRIPTION
+
+Run I<COMMAND>, then listen to signals (see signal(7)).
+When sigdispatch(1) receives I<SIG_A> it sends I<SIG_B> to the running I<COMMAND>.
+
+Signals may be written as numbers, symbolic name, or name with "SIG" prefix.
+A dash C<-> for I<SIG_B> makes the corresponding I<SIG_A> ignored, i.e. not relayed to child process.
+
+By default, all signals map to itself and being relayed to child process, to the system
+limitations obviously, i.e. you can not relay SIGSTOP since you can not even catch it.
+
+=head1 EXAMPLES
+
+=over 4
+
+=item SIGINT:SIGTERM
+
+receive SIGINT, emit SIGTERM
+
+=item INT:SIGTERM
+
+=item INT:TERM
+
+same
+
+=item SIGINT:-
+
+receive SIGINT and ignore it, do not dispatch
+
+=item INT:15
+
+signal numbers also work
+
+=back
+
+=head1 EXIT STATUS
+
+Exit with I<COMMAND>'s exit code if it's exited normally.
+If signaled, exit with 128 + signal number, similarly to bash(1).
+
+=cut
